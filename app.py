@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import mail_send #Импортируем класс для отправки писем
 
 app = Flask(__name__) # Создаем экземпляр приложения Flask
-sender = mail_send.EmailSender('vovaanime@mail.ru', 'dQ9cz8UYEY7hBBsRdne3', 'vovaanime@mail.ru') # Настройка отправителя
+sender = mail_send.EmailSender('*********@mail.**', '***************', '**********@mail.**') # Настройка отправителя
 
 @app.route('/') # Декоратор для маршрута главной страницы
 def index():
@@ -19,8 +19,8 @@ def submit_application(): # Получаем данные из формы
     # Получаем вложения
     attachment = request.files.getlist('attachment') # Список вложений
     
-    #Отправка письма egor2002i@mail.ru
-    if sender.send_mail('vovaanime@mail.ru', subject='Новая заявка', body=f'Имя {name}\nmail: {email}\n\n{message}', attachment=attachment[0]) == 'failed':
+    #Отправка письма mail
+    if sender.send_mail('*********@mail.**', subject='Новая заявка', body=f'Имя {name}\nmail: {email}\n\n{message}', attachment=attachment[0]) == 'failed':
         return jsonify({'status': 'failed'}), 500 #Ошибка
     else:
         return jsonify({'status': 'success'}), 200 #Успешно
